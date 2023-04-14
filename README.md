@@ -45,7 +45,7 @@ Before you can run this app, you'll need to have the following installed on your
 1. Clone the repository to your local machine:
 
    ```
-   git clone https://github.com/your-username/your-repo.git
+   git clone https://github.com/jimmyfish/batick.git
    ```
 
 2. Install the app's dependencies using Composer and NPM:
