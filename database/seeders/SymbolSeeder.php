@@ -29,14 +29,23 @@ class SymbolSeeder extends Seeder
 
             $body = collect(json_decode($response->getBody()->getContents()));
             $body->each(function ($symbol) use (&$symbols) {
-                array_push($symbols, [
-                    'name' => strtolower($symbol->symbol),
-                    'symbol' => $symbol->symbol,
-                    'created_at' => Carbon::now(),
-                ]);
+                if (
+                    (substr($symbol->symbol, -4) === "USDT") &&
+                    !str_contains($symbol->symbol, 'BULL') &&
+                    !str_contains($symbol->symbol, 'BEAR') &&
+                    !str_contains($symbol->symbol, 'DOWN') &&
+                    !str_contains($symbol->symbol, 'UP')
+                ) {
+                    echo "adding {$symbol->symbol} \n";
+                    array_push($symbols, [
+                        'name' => strtolower($symbol->symbol),
+                        'symbol' => $symbol->symbol,
+                        'created_at' => Carbon::now(),
+                    ]);
+                }
             });
         } catch (\Exception $e) {
-            echo("Failing, retry...");
+            echo ("Failing, retry...");
             $this->getSymbols();
         }
 

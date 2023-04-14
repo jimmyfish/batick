@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Bybit-logo.png/1597px-Bybit-logo.png?20211115153121" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
@@ -7,47 +7,95 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## TL;DR
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Bybit** is a popular cryptocurrency derivatives exchange that allows users to trade futures contracts, perpetual contracts, and other cryptocurrency-based financial products. While the platform is known for its advanced trading tools and features, many users may want to test their trading strategies before risking real money. That's where a sandbox environment app comes in.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+A sandbox environment app for Bybit would be a platform that allows users to simulate trading in a virtual environment without using real funds. This type of app would be ideal for new traders who are still learning the ins and outs of trading cryptocurrency, as well as experienced traders who want to test new strategies before risking real money.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The sandbox environment would replicate the features and functionality of the real Bybit platform, allowing users to place orders, manage positions, and track their profits and losses in real-time. The app would provide access to all of the trading tools and features available on the Bybit platform, including charts, order books, and market data, so that users can test their strategies in a realistic trading environment.
 
-## Learning Laravel
+One of the key benefits of using a sandbox environment app for Bybit is that users can experiment with different trading strategies and risk management techniques without putting their own money on the line. This can help traders identify potential weaknesses in their strategies and refine their approach before they start trading with real funds.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+The app could also include educational resources and tutorials to help users learn more about cryptocurrency trading and the specific features of the Bybit platform. This would be especially useful for new traders who are just getting started in the world of cryptocurrency trading.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+In addition to providing a safe and secure environment for users to test their trading strategies, a sandbox environment app for Bybit could also offer other benefits, such as:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Real-time market data and news updates to help traders stay informed about the latest trends and developments in the cryptocurrency markets.
+- Advanced charting tools and technical analysis indicators to help traders identify trends and make more informed trading decisions.
+- Integration with third-party trading bots and tools to help automate trading strategies and improve efficiency.
 
-## Laravel Sponsors
+Overall, a sandbox environment app for Bybit would be a valuable tool for traders of all skill levels who want to test their trading strategies in a risk-free environment. With access to real-time market data, advanced trading tools, and educational resources, users can improve their trading skills and make more informed decisions when they start trading with real funds.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+You're right, apologies for that oversight. Here's an updated README that includes instructions for compiling Tailwind CSS:
 
-### Premium Partners
+### Prerequisites
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Before you can run this app, you'll need to have the following installed on your machine:
+
+- PHP (version 7.4 or higher)
+- Composer
+- Node.js
+- NPM
+- MySQL
+
+### Installation
+
+1. Clone the repository to your local machine:
+
+   ```bash
+   git clone https://github.com/your-username/your-repo.git
+   ```
+
+2. Install the app's dependencies using Composer and NPM:
+
+   ```bash
+   composer install
+   npm install
+   ```
+
+3. Copy the `.env.example` file and rename it to `.env`. Update the file with your database credentials:
+
+   ```yaml
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=your-database-name
+   DB_USERNAME=your-database-username
+   DB_PASSWORD=your-database-password
+   ```
+
+4. Generate a new application key:
+
+   ```bash
+   php artisan key:generate
+   ```
+
+5. Compile Tailwind CSS by running the following command:
+
+   ```bash
+   npm run dev
+   ```
+
+6. Run the app's database migrations:
+
+   ```bash
+   php artisan migrate
+   ```
+
+### Running the App
+
+To run the app, use the following command:
+
+```bash
+php artisan serve
+```
+
+This will start a local development server at **http://localhost:8000**. You can access the app by navigating to this URL in your web browser.
+
+### Conclusion
+
+That's it! You should now have a working Laravel app with Tailwind CSS and a MySQL database. If you run into any issues, please refer to the Laravel documentation or consult the official documentation for Tailwind CSS or MySQL.
 
 ## Contributing
 
@@ -57,10 +105,6 @@ Thank you for considering contributing to the Laravel framework! The contributio
 
 In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This sandbox supposed to be private work but you can treat it as an open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

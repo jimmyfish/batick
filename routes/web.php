@@ -18,9 +18,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::group([
+    'prefix' => 'dashboard'
+], function () {
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::group([
+        'prefix' => 'symbol'
+    ], function () {
+        Route::get('/', [App\Http\Controllers\Symbol\ListAction::class, 'index'])->name('symbol.list');
+        Route::get('/toggle', App\Http\Controllers\Symbol\ToggleAction::class)->name('symbol.toggle');
+    });
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,4 +40,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
