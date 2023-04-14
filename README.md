@@ -27,7 +27,7 @@ In addition to providing a safe and secure environment for users to test their t
 
 Overall, a sandbox environment app for Bybit would be a valuable tool for traders of all skill levels who want to test their trading strategies in a risk-free environment. With access to real-time market data, advanced trading tools, and educational resources, users can improve their trading skills and make more informed decisions when they start trading with real funds.
 
-You're right, apologies for that oversight. Here's an updated README that includes instructions for compiling Tailwind CSS:
+## How to run this bad boy?
 
 ### Prerequisites
 
@@ -38,25 +38,26 @@ Before you can run this app, you'll need to have the following installed on your
 - Node.js
 - NPM
 - MySQL
+- A VPN client *10 out of 10 highly recommended for ID*
 
 ### Installation
 
 1. Clone the repository to your local machine:
 
-   ```bash
+   ```
    git clone https://github.com/your-username/your-repo.git
    ```
 
 2. Install the app's dependencies using Composer and NPM:
 
-   ```bash
+   ```
    composer install
    npm install
    ```
 
 3. Copy the `.env.example` file and rename it to `.env`. Update the file with your database credentials:
 
-   ```yaml
+   ```
    DB_CONNECTION=mysql
    DB_HOST=127.0.0.1
    DB_PORT=3306
@@ -67,35 +68,31 @@ Before you can run this app, you'll need to have the following installed on your
 
 4. Generate a new application key:
 
-   ```bash
+   ```
    php artisan key:generate
    ```
 
 5. Compile Tailwind CSS by running the following command:
 
-   ```bash
-   npm run dev
    ```
-
-6. Run the app's database migrations:
-
-   ```bash
-   php artisan migrate
+   npm run dev
    ```
 
 ### Running the App
 
+Before running the app, you'll need to switch on your VPN client and connect to a server in the desired country. This is important because some features of the app may be restricted in certain regions.
+
 To run the app, use the following command:
 
-```bash
+```
 php artisan serve
 ```
 
-This will start a local development server at **http://localhost:8000**. You can access the app by navigating to this URL in your web browser.
+This will start a local development server at `http://localhost:8000`. You can access the app by navigating to this URL in your web browser.
 
 ### Conclusion
 
-That's it! You should now have a working Laravel app with Tailwind CSS and a MySQL database. If you run into any issues, please refer to the Laravel documentation or consult the official documentation for Tailwind CSS or MySQL.
+That's it! You should now have a working Laravel app with Tailwind CSS and a MySQL database. Remember to switch on your VPN client before running the app to ensure that all features are available. If you run into any issues, please refer to the Laravel documentation or consult the official documentation for Tailwind CSS or MySQL.
 
 ## Contributing
 
