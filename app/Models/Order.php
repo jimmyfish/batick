@@ -6,14 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Symbol extends Model
+class Order extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
 
-    public function orders()
+    public function symbol()
     {
-        return $this->hasMany(Order::class);
+        return $this->belongsTo(Symbol::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

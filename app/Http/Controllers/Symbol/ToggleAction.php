@@ -18,6 +18,6 @@ class ToggleAction extends Controller
             $item->delete();
         }
 
-        return redirect()->route('symbol.list');
+        return redirect()->back();
     }
 }

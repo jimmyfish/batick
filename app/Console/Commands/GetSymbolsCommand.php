@@ -31,6 +31,7 @@ class GetSymbolsCommand extends Command
 
     private function getSymbols()
     {
+        $symbols = [];
         try {
             $base_url = config('requester.binance.base_url');
             $response = Http::get("{$base_url}/api/v3/ticker/price");

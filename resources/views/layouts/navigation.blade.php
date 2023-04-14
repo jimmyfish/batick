@@ -17,7 +17,7 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('symbol.list')" :active="request()->routeIs('symbol.list')">
+                    <x-nav-link :href="route('symbol.list', ['source' => 'bybit'])" :active="request()->routeIs('symbol.list')">
                         {{ __('Symbol') }}
                     </x-nav-link>
                 </div>

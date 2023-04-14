@@ -16,8 +16,43 @@ class SymbolSeeder extends Seeder
      */
     public function run(): void
     {
+        // DB::table('symbols')->truncate();
         $symbols = $this->getSymbols();
         DB::table('symbols')->insert($symbols);
+    }
+
+    private function getBybitSymbols(): array
+    {
+        $symbols = [];
+
+        $base_url = config('requester.bybit.base_url');
+        $response = Http::get("{$base_url}/v5/market/tickers", ['category' => 'spot']);
+
+        $body = json_decode($response->getBody()->getContents());
+
+        foreach ($body->result->list as $symbol) {
+            if (
+                (substr($symbol->symbol, -4) === "USDT") &&
+                !str_contains($symbol->symbol, 'BULL') &&
+                !str_contains($symbol->symbol, 'BEAR') &&
+                !str_contains($symbol->symbol, 'DOWN') &&
+                !str_contains($symbol->symbol, 'UP') &&
+                !str_contains($symbol->symbol, '2L') &&
+                !str_contains($symbol->symbol, '2S') &&
+                !str_contains($symbol->symbol, '3L') &&
+                !str_contains($symbol->symbol, '3S')
+            ) {
+                echo "adding {$symbol->symbol} \n";
+                array_push($symbols, [
+                    'name' => strtolower($symbol->symbol),
+                    'symbol' => $symbol->symbol,
+                    'source' => 'bybit',
+                    'created_at' => Carbon::now(),
+                ]);
+            }
+        }
+
+        return $symbols;
     }
 
     private function getSymbols(): array
@@ -40,6 +75,7 @@ class SymbolSeeder extends Seeder
                     array_push($symbols, [
                         'name' => strtolower($symbol->symbol),
                         'symbol' => $symbol->symbol,
+                        'source' => 'binance',
                         'created_at' => Carbon::now(),
                     ]);
                 }
