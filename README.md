@@ -44,20 +44,20 @@ Before you can run this app, you'll need to have the following installed on your
 
 1. Clone the repository to your local machine:
 
-   ```
+   ```bash
    git clone https://github.com/jimmyfish/batick.git
    ```
 
 2. Install the app's dependencies using Composer and NPM:
 
-   ```
+   ```bash
    composer install
    npm install
    ```
 
 3. Copy the `.env.example` file and rename it to `.env`. Update the file with your database credentials:
 
-   ```
+   ```yaml
    DB_CONNECTION=mysql
    DB_HOST=127.0.0.1
    DB_PORT=3306
@@ -68,16 +68,21 @@ Before you can run this app, you'll need to have the following installed on your
 
 4. Generate a new application key:
 
-   ```
+   ```bash
    php artisan key:generate
    ```
 
 5. Compile Tailwind CSS by running the following command:
 
-   ```
+   ```bash
    npm run dev
    ```
 
+6. Run the app's database migrations:
+
+   ```bash
+   php artisan migrate
+   ```
 ### Running the App
 
 Before running the app, you'll need to switch on your VPN client and connect to a server in the desired country. This is important because some features of the app may be restricted in certain regions.
