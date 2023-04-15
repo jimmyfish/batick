@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Bybit-logo.png/1597px-Bybit-logo.png?20211115153121" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://bybit.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Bybit-logo.png/1597px-Bybit-logo.png?20211115153121" width="400" alt="Bybit Logo"></a></p>
 
 <p align="center">
 <a href="https://github.com/jimmyfish/batick/actions"><img src="https://github.com/jimmyfish/batick/workflows/tests/badge.svg" alt="Build Status"></a>
