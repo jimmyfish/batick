@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Http;
 
 class GetLatestPriceService
 {
-    public function get(string $symbol): float
+    public function get($symbol): float
     {
         $response = Http::get(config('requester.bybit.base_url').'/v5/market/tickers', [
             'category' => 'spot',
-            'symbol' => strtoupper($symbol),
+            'symbol' => strtoupper($symbol->name),
         ]);
 
         $responseBody = json_decode($response->getBody()->getContents());

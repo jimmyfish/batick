@@ -17,7 +17,7 @@ class SymbolSeeder extends Seeder
     public function run(): void
     {
         // DB::table('symbols')->truncate();
-        $symbols = $this->getSymbols();
+        $symbols = $this->getBybitSymbols();
         DB::table('symbols')->insert($symbols);
     }
 

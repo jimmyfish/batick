@@ -13,6 +13,7 @@ class CreateOrderService
 {
     private $symbol;
     private $amount;
+    private $size;
     private $getLatestPriceService;
 
     public function __construct(GetLatestPriceService $getLatestPriceService)
@@ -22,13 +23,12 @@ class CreateOrderService
 
     public function __invoke(Request $request, string $symbol, float $amount)
     {
-
     }
 
     public function console(string $symbol, float $amount)
     {
         Auth::setUser(User::first());
-        $this->symbol = $symbol;
+        $this->symbol = Symbol::where(['name' => strtolower($symbol), 'source' => 'bybit'])->firstOrFail();
         $this->amount = $amount;
         $this->create();
 
@@ -37,16 +37,39 @@ class CreateOrderService
 
     private function create()
     {
-        $symbol = Symbol::where(['name' => strtolower($this->symbol)])->firstOrFail();
+        $buyPrice = $this->getLatestPriceService->get($this->symbol);
+        $this->size = $this->amount / $buyPrice;
 
-        $data = [
-            'symbol_id' => $symbol->id,
-            'buy_price' => $this->getLatestPriceService->get($this->symbol),
-            'user_id' => Auth::user()->id
-        ];
+        if (!$this->checkDuplicateOrder()) {
+            $data = [
+                'symbol_id' => $this->symbol->id,
+                'buy_price' => $buyPrice,
+                'user_id' => Auth::user()->id,
+                'size' => $this->size,
+            ];
+            
+            Order::create($data);
 
-        Order::create($data);
+            $this->chargeBalance();
+        }
+    }
 
-        // dd($data);
+    private function chargeBalance(): void
+    {
+        $user = Auth::user();
+        $balance = $user->balance;
+        User::find($user->id)->update(['balance' => $balance - $this->amount]);
+    }
+
+    private function checkDuplicateOrder()
+    {
+        /** @var $user App\Models\User */
+        $user = Auth::user();
+        $duplicate = $user->orders()->where([
+            'symbol_id' => $this->symbol->id,
+            'is_closed' => false
+        ])->count();
+
+        return $duplicate > 0;
     }
 }

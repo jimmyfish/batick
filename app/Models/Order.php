@@ -12,6 +12,10 @@ class Order extends Model
 
     protected $guarded = [];
 
+    protected $mapped = [
+        'is_closed' => 'boolean',
+    ];
+
     public function symbol()
     {
         return $this->belongsTo(Symbol::class);
@@ -20,5 +24,10 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function wereOpen()
+    {
+        return $this->is_closed === false;
     }
 }
