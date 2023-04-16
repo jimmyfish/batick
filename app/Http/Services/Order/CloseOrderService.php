@@ -23,10 +23,32 @@ class CloseOrderService
         Auth::setUser(User::first());
         $this->symbol = Symbol::find($symbolId);
 
-        return "Closing {$this->symbol->name} order with " . $this->closeOrder();
+        return "Closing {$this->symbol->name} order with " . $this->consoleCloseOrder();
     }
 
-    private function closeOrder(): int
+    public function closeOrder(int $orderId)
+    {
+        /** @var $user User */
+        $user = Auth::user();
+        $order = $user->orders()->where([
+            'id' => $orderId,
+            'is_closed' => false
+        ])->first();
+
+        $this->symbol = $order->symbol;
+
+        $sellPrice = $this->getLatestPriceService->get($this->symbol);
+        if ($order) Order::find($order->id)->update(['sell_price' => round($sellPrice, 10), 'is_closed' => true]);
+
+        $buy = $order->size * $order->buyPrice;
+        $sell = $order->size * $sellPrice;
+
+        $this->setProfit($sell);
+
+        return true;
+    }
+
+    private function consoleCloseOrder(): int
     {
         /** @var $user App\Models\User */
         $user = Auth::user();
@@ -37,7 +59,7 @@ class CloseOrderService
 
         $sellPrice = $this->getLatestPriceService->get($this->symbol);
 
-        if ($order) Order::find($order->id)->update(['sell_price' => round($sellPrice, 10),'is_closed' => true]);
+        if ($order) Order::find($order->id)->update(['sell_price' => round($sellPrice, 10), 'is_closed' => true]);
 
         $buy = $order->size * $order->buyPrice;
         $sell = $order->size * $sellPrice;

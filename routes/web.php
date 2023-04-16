@@ -38,6 +38,7 @@ Route::group([
         'prefix' => 'order'
     ], function () {
         Route::post('/', App\Http\Controllers\Order\CreateOrderAction::class)->name('order.create');
+        Route::get('/', App\Http\Controllers\Order\CloseOrderAction::class)->name('order.close');
     });
 
 })->name('dashboard');

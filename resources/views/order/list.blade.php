@@ -72,21 +72,21 @@
                                         </td>
                                         <td class="px-6 py-2">
                                             @if ($order->is_closed)
-                                                <small><strong>$</strong></small>
                                                 @php $profit = round($order->size * $order->sell_price - $order->size * $order->buy_price, 3) @endphp
                                                 <span
                                                     class="@if ($profit > 0) text-green-600 @else text-red-600 @endif">
                                                     @if ($profit < 0)
                                                         -
                                                     @endif
-                                                    {{ $profit }}
+                                                    <small><strong>$</strong></small>
+                                                    {{ abs($profit) }}
                                                 </span>
                                             @else
                                                 -
                                             @endif
                                         </td>
                                         <td class="px-6 py-2">
-                                            <a href="{{ route('symbol.toggle', ['id' => $order->id]) }}">
+                                            <a href="{{ route('order.close', ['order_id' => $order->id]) }}">
                                                 @if (!$order->is_closed)
                                                     <ion-icon name="stop-circle-outline"></ion-icon>
                                                 @else
