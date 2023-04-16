@@ -28,6 +28,13 @@ class CreateOrderService
         $this->create();
     }
 
+    public function api($user, string $symbol, float $amount)
+    {
+        $this->symbol = Symbol::where(['name' => strtolower($symbol), 'source' => 'bybit'])->firstOrFail();
+        $this->amount = $amount;
+        $this->create();
+    }
+
     public function console(string $symbol, float $amount)
     {
         Auth::setUser(User::first());
@@ -57,17 +64,36 @@ class CreateOrderService
         }
     }
 
-    private function chargeBalance(): void
+    private function apiCreate($user)
     {
-        $user = Auth::user();
+        $buyPrice = $this->getLatestPriceService->get($this->symbol);
+        $this->size = $this->amount / $buyPrice;
+
+        if (!$this->checkDuplicateOrder($user)) {
+            $data = [
+                'symbol_id' => $this->symbol->id,
+                'buy_price' => round($buyPrice, 10),
+                'user_id' => Auth::user()->id,
+                'size' => round($this->size, 10),
+            ];
+            
+            Order::create($data);
+
+            $this->chargeBalance($user);
+        }
+    }
+
+    private function chargeBalance($user = null): void
+    {
+        $user = $user ?? Auth::user();
         $balance = $user->balance;
         User::find($user->id)->update(['balance' => $balance - $this->amount]);
     }
 
-    private function checkDuplicateOrder()
+    private function checkDuplicateOrder($user = null)
     {
         /** @var $user App\Models\User */
-        $user = Auth::user();
+        $user = $user ?? Auth::user();
         $duplicate = $user->orders()->where([
             'symbol_id' => $this->symbol->id,
             'is_closed' => false
