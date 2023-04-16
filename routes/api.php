@@ -23,4 +23,5 @@ Route::group([
     'middleware' => 'auth:sanctum'
 ], function () {
     Route::post('/', App\Http\Controllers\Api\Order\CreateOrderAction::class)->name('api.order.create');
+    Route::delete('/', App\Http\Controllers\Api\Order\CloseOrderAction::class)->name('api.order.close');
 });
