@@ -19,19 +19,28 @@ Route::get('/', function () {
 });
 
 Route::group([
-    'prefix' => 'dashboard'
+    'prefix' => 'dashboard',
+    'middleware' => ['auth', 'verified']
 ], function () {
     Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
 
+    Route::get('symbols', [App\Http\Controllers\Symbol\ListAction::class, 'index'])->name('symbol.list');
     Route::group([
         'prefix' => 'symbol'
     ], function () {
-        Route::get('/', [App\Http\Controllers\Symbol\ListAction::class, 'index'])->name('symbol.list');
         Route::get('/toggle', App\Http\Controllers\Symbol\ToggleAction::class)->name('symbol.toggle');
     });
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+    Route::get('orders', App\Http\Controllers\Order\ListOrdersAction::class)->name('order.list');
+    Route::group([
+        'prefix' => 'order'
+    ], function () {
+        Route::post('/', App\Http\Controllers\Order\CreateOrderAction::class)->name('order.create');
+    });
+
+})->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {

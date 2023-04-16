@@ -11,7 +11,8 @@
         "laravel/octane": "^1.5",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-        "spiral/roadrunner": "^2.8.2"
+        "spiral/roadrunner": "^2.8.2",
+        "victorybiz/laravel-simple-select": "^1.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

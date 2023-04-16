@@ -21,8 +21,11 @@ class CreateOrderService
         $this->getLatestPriceService = $getLatestPriceService;
     }
 
-    public function __invoke(Request $request, string $symbol, float $amount)
+    public function __invoke(string $symbol, float $amount)
     {
+        $this->symbol = Symbol::where(['id' => strtolower($symbol), 'source' => 'bybit'])->firstOrFail();
+        $this->amount = $amount;
+        $this->create();
     }
 
     public function console(string $symbol, float $amount)
@@ -43,9 +46,9 @@ class CreateOrderService
         if (!$this->checkDuplicateOrder()) {
             $data = [
                 'symbol_id' => $this->symbol->id,
-                'buy_price' => $buyPrice,
+                'buy_price' => round($buyPrice, 10),
                 'user_id' => Auth::user()->id,
-                'size' => $this->size,
+                'size' => round($this->size, 10),
             ];
             
             Order::create($data);

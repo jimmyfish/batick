@@ -37,7 +37,7 @@ class CloseOrderService
 
         $sellPrice = $this->getLatestPriceService->get($this->symbol);
 
-        if ($order) Order::find($order->id)->update(['sell_price' => $sellPrice,'is_closed' => true]);
+        if ($order) Order::find($order->id)->update(['sell_price' => round($sellPrice, 10),'is_closed' => true]);
 
         $buy = $order->size * $order->buyPrice;
         $sell = $order->size * $sellPrice;

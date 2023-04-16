@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('symbol_id')->nullable();
             $table->foreign('symbol_id')->references('id')->on('symbols')->onDelete('set null');
-            $table->float('buy_price');
-            $table->float('sell_price')->nullable();
+            $table->float('buy_price', 20, 10);
+            $table->float('sell_price', 20, 10)->nullable();
+            $table->float('size', 20, 10);
             $table->boolean('is_closed')->default(false);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

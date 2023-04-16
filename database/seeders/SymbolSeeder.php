@@ -15,7 +15,7 @@ class SymbolSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-    {
+    {       
         // DB::table('symbols')->truncate();
         $symbols = $this->getBybitSymbols();
         DB::table('symbols')->insert($symbols);
@@ -42,11 +42,11 @@ class SymbolSeeder extends Seeder
                 !str_contains($symbol->symbol, '3L') &&
                 !str_contains($symbol->symbol, '3S')
             ) {
-                echo "adding {$symbol->symbol} \n";
                 array_push($symbols, [
                     'name' => strtolower($symbol->symbol),
                     'symbol' => $symbol->symbol,
                     'source' => 'bybit',
+                    'deleted_at' => Carbon::now(),
                     'created_at' => Carbon::now(),
                 ]);
             }
@@ -71,7 +71,6 @@ class SymbolSeeder extends Seeder
                     !str_contains($symbol->symbol, 'DOWN') &&
                     !str_contains($symbol->symbol, 'UP')
                 ) {
-                    echo "adding {$symbol->symbol} \n";
                     array_push($symbols, [
                         'name' => strtolower($symbol->symbol),
                         'symbol' => $symbol->symbol,
